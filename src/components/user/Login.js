@@ -114,12 +114,12 @@ function Login() {
                 </div>
               </div>
               <div className="d-flex  justify-content-around text-primary">
-                <div
+                <div style={{cursor:'pointer'}}
                   className="signup  border-bottom  cursor-pointer"
                   onClick={() => navigate("/register")}>
                   Not registered yet?
                 </div>
-                <div
+                <div style={{cursor:'pointer'}}
                   className="signup  border-bottom  cursor-pointer"
                   onClick={() => navigate("/password/forgot")}>
                   Forgot password?
