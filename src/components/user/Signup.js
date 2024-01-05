@@ -3,6 +3,7 @@ import "./user.css";
 import { EyeFill, EyeSlashFill } from "react-bootstrap-icons";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../expense/LoadingSpinner";
 function Signup() {
   const [formData, setFormData] = useState({
     name: "",
@@ -11,6 +12,7 @@ function Signup() {
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading]= useState(false)
   const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,6 +31,7 @@ function Signup() {
     e.preventDefault();
 
     try {
+      setIsLoading(true)
       const response = await axios.post(
         "https://expense-g7cl.onrender.com/signup",
         formData
@@ -52,6 +55,9 @@ function Signup() {
     } catch (err) {
       console.log(err.response.data.error);
       alert(err.response.data.error);
+    }
+    finally{
+      setIsLoading(false)
     }
   };
 
@@ -120,10 +126,11 @@ function Signup() {
                   Already registered? Login
                 </div>
               </div>
-              <button type="submit" className="btn btn-primary mt-4 w-100 ">
+              <button type="submit" className="btn btn-primary mt-4 w-100 " disabled={isLoading}>
                 Submit
               </button>
-            </form>
+            </form> {isLoading && <LoadingSpinner />}
+
           </div>
         </div>
       </div>

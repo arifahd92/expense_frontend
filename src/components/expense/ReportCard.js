@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import { useSelector } from "react-redux";
+import LoadingSpinner from "./LoadingSpinner";
 export default function ReportCard() {
   const [report, setReport] = useState([]);
+  const [isLoading, setIsLoading]= useState(false)
+  const [onceFetched, setOnceFetched]=useState(false)
   //const {premium}= useSelector((state)=>)
   const { darkFlag, premium } = useSelector((state) => state.user);
   useEffect(() => {
     const userToken = localStorage.getItem("userToken");
     const fetchUser = async () => {
       try {
+        setIsLoading(true)
         const response = await axios.get(
           "https://expense-g7cl.onrender.com/premium/report-card",
           {
@@ -27,6 +31,10 @@ export default function ReportCard() {
       } catch (error) {
         console.log(error.response);
         alert("Add atleast two expense  ");
+      }
+      finally{
+        setIsLoading(false)
+        setOnceFetched(true)
       }
     };
     fetchUser();
@@ -157,7 +165,8 @@ export default function ReportCard() {
           </table>
         </div>
       )}
-      {report.length < 4 && (
+       {isLoading && <LoadingSpinner />}
+      {report.length < 4 && onceFetched && (
         <div class="alert alert-warning text-bg-info text-center  ">
           Add atleast 2 expenses...
         </div>

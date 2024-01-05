@@ -1,15 +1,18 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import LoadingSpinner from "../expense/LoadingSpinner";
 
 export default function ResetPassword() {
   const { reqId } = useParams();
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [cnfPassword, setCnfPassword] = useState("");
+  const [isLoading, setIsLoading]= useState(false)
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setIsLoading(true)
       if (password !== cnfPassword) {
         alert("confirm password did not match with password");
         return;
@@ -21,7 +24,11 @@ export default function ResetPassword() {
       console.log(response.data);
       alert(response.data.message);
       navigate("/");
-    } catch (error) {}
+    } catch (error) {
+      alert(error.message)
+    } finally{
+      setIsLoading(false)
+    }
   };
   return (
     <div>
@@ -59,10 +66,11 @@ export default function ResetPassword() {
                 />
               </div>
 
-              <button type="submit" className="btn btn-primary mt-4 w-100 ">
+              <button type="submit" className="btn btn-primary mt-4 w-100 "  disabled={isLoading}>
                 submit
               </button>
             </form>
+            {isLoading && <LoadingSpinner />}
           </div>
         </div>
       </div>

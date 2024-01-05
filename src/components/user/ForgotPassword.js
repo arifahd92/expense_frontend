@@ -1,12 +1,15 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../expense/LoadingSpinner";
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading]= useState(false)
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setIsLoading(true)
       const response = await axios.post(
         "https://expense-g7cl.onrender.com/password/forgot-password",
         { email }
@@ -21,6 +24,9 @@ export default function ForgotPassword() {
         return;
       }
       alert(error.message);
+    }
+    finally{
+      setIsLoading(false)
     }
   };
   return (
@@ -61,12 +67,13 @@ export default function ForgotPassword() {
               </div>
               <div className="row">
                 <div className="col text-center">
-                  <button type="submit" className="btn btn-primary mt-4 w-100">
+                  <button type="submit" className="btn btn-primary mt-4 w-100"  disabled={isLoading}>
                     Submit
                   </button>
                 </div>
               </div>
             </form>
+            {isLoading && <LoadingSpinner />}
           </div>
         </div>
       </div>

@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import LoadingSpinner from "./LoadingSpinner";
 export default function Leaderboard() {
   const userToken = localStorage.getItem("userToken");
   const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading]= useState(false)
+  
   const { darkFlag } = useSelector((state) => state.user);
   useEffect(() => {
     const userToken = localStorage.getItem("userToken");
     const fetchUser = async () => {
       try {
+        setIsLoading(true)
         const response = await axios.get(
           "https://expense-g7cl.onrender.com/premium/leader-board",
           {
@@ -21,6 +25,7 @@ export default function Leaderboard() {
         console.log("from leaderboard");
         //getting sorted and grouped data
         console.log(users);
+      
         setUsers(users);
         /*
         //with bad query at backend***********
@@ -46,6 +51,9 @@ export default function Leaderboard() {
         */
       } catch (error) {
         console.log(error.response);
+      }
+      finally{
+        setIsLoading(false)
       }
     };
     fetchUser();
@@ -101,6 +109,7 @@ export default function Leaderboard() {
               </div>
             );
           })}
+           {isLoading && <LoadingSpinner />}
       </div>
     </div>
   );

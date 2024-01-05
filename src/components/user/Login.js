@@ -4,6 +4,7 @@ import { EyeFill, EyeSlashFill } from "react-bootstrap-icons"; // Import Bootstr
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import LoadingSpinner from "../expense/LoadingSpinner";
 function Login() {
   const [formData, setFormData] = useState({
     email: "dummy@gmail.com",
@@ -11,6 +12,7 @@ function Login() {
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading,setIsLoading]=useState(false)
   const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,6 +31,7 @@ function Login() {
     e.preventDefault();
 
     try {
+      setIsLoading(true)
       const response = await axios.post(
         "https://expense-g7cl.onrender.com/login",
         formData
@@ -58,6 +61,10 @@ function Login() {
       }
       alert(err.message);
     }
+    finally{
+    setIsLoading(false)
+
+    }
   };
 
   return (
@@ -66,6 +73,7 @@ function Login() {
         <h2 className="text-secondary">Login</h2>
       </div>
       <div className="container mt-3  ">
+
         <div className="row">
           <div className="col-md-10 offset-md-1 col-lg-8  col-xl-6 offset-xl-3 offset-lg-2 text-secondary">
             <form onSubmit={handleSubmit}>
@@ -118,10 +126,11 @@ function Login() {
                 </div>
               </div>
 
-              <button type="submit" className="btn btn-primary mt-4 w-100 ">
+              <button type="submit" className="btn btn-primary mt-4 w-100 "  disabled={isLoading}>
                 submit
               </button>
             </form>
+            {isLoading && <LoadingSpinner />}
           </div>
         </div>
       </div>

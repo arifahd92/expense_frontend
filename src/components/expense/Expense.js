@@ -11,6 +11,7 @@ import {
   fetchExpenses,
 } from "../../store/slices/expense";
 import Header from "./Header";
+import Loading from "../../Loading";
 const Leaderboard =lazy(()=>import("./Leaderboard")) ;
 const ReportCard =lazy(()=>import('./ReportCard')) 
 
@@ -136,8 +137,8 @@ export default function Expense() {
   return (
     <>
       <Header />
-      {boardFlag && <Suspense fallback={<div>loading leaderboard..</div>}><Leaderboard /></Suspense> }
-      {reportFlag && <Suspense fallback={<div>loading leaderboard..</div>}><ReportCard /></Suspense>}
+      {boardFlag &&  <Suspense fallback={<Loading/>}><Leaderboard /></Suspense> }
+      {reportFlag &&  <Suspense fallback={<Loading/>}><ReportCard /></Suspense>}
 
       {showInput && (
         <div

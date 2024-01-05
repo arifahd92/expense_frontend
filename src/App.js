@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Loading from './Loading';
 
 // Lazy-loaded components
 const RedirectComponent = lazy(() => import('./components/user/higherOrderComponents/Redirect'));
@@ -15,11 +16,12 @@ const App = () => {
 
   return (
     <div className={darkFlag ? 'bg-black text-primary min-vh-100 min-vw-100' : ''}>
+      
       <Routes>
         <Route
           path="/"
           element={
-            <Suspense fallback={<div>Loading Redirect...</div>}>
+            <Suspense fallback={<Loading/>}>
               <RedirectComponent Component={Login} />
             </Suspense>
           }
@@ -27,7 +29,7 @@ const App = () => {
         <Route
           path="/expense"
           element={
-            <Suspense fallback={<div>Loading Expense...</div>}>
+            <Suspense fallback={<Loading/>}>
               <RedirectComponent Component={Expense} />
             </Suspense>
           }
@@ -35,7 +37,7 @@ const App = () => {
         <Route
           path="/register"
           element={
-            <Suspense fallback={<div>Loading Signup...</div>}>
+            <Suspense fallback={<Loading/>}>
               <RedirectComponent Component={Signup} />
             </Suspense>
           }
@@ -43,7 +45,7 @@ const App = () => {
         <Route
           path="/password/forgot"
           element={
-            <Suspense fallback={<div>Loading ForgotPassword...</div>}>
+            <Suspense fallback={<Loading/>}>
               <ForgotPassword />
             </Suspense>
           }
@@ -51,7 +53,7 @@ const App = () => {
         <Route
           path="password/reset-password/:reqId"
           element={
-            <Suspense fallback={<div>Loading ResetPassword...</div>}>
+            <Suspense fallback={<Loading/>}>
               <ResetPassword />
             </Suspense>
           }
