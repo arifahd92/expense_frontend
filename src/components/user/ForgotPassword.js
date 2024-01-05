@@ -59,8 +59,8 @@ export default function ForgotPassword() {
               </div>
 
               <div className="d-flex justify-content-center">
-                <div
-                  className="signup cursor-pointer text-primary"
+                <div style={{cursor:'pointer'}}
+                  className="signup  text-primary"
                   onClick={() => navigate("/register")}>
                   Not registered yet? Register
                 </div>

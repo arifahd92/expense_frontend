@@ -120,7 +120,7 @@ function Signup() {
                 </div>
               </div>
               <div className="d-flex justify-content-center text-primary">
-                <div
+                <div style={{cursor:'pointer'}}
                   className="signup  border-bottom  cursor-pointer"
                   onClick={() => navigate("/")}>
                   Already registered? Login
