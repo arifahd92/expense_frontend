@@ -16,7 +16,7 @@ export const fetchExpenses = createAsyncThunk(
     // console.log(userToken);
     try {
       const response = await axios.get(
-        `/get-expense?page=${page}&pageSize=${rowsPerPage}`,
+        `https://expense-g7cl.onrender.com/get-expense?page=${page}&pageSize=${rowsPerPage}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -58,7 +58,7 @@ export const deleteExpense = createAsyncThunk(
       console.log(payload.id);
       console.log(payload.index);
       const response = await axios.delete(
-        `/delete-expense/${expenseId}`,
+        `https://expense-g7cl.onrender.com/delete-expense/${expenseId}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -97,8 +97,8 @@ export const addUpdate = createAsyncThunk(
   }) => {
     try {
       let response;
-      let addURL = `/add-expense`;
-      let updateURL = `/update-expense/${expenseId}`;
+      let addURL = `https://expense-g7cl.onrender.com/add-expense`;
+      let updateURL = `https://expense-g7cl.onrender.com/update-expense/${expenseId}`;
       if (editFlag) {
         response = await axios.put(updateURL, input, {
           headers: {

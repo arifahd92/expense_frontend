@@ -11,7 +11,7 @@ export default function ForgotPassword() {
     try {
       setIsLoading(true)
       const response = await axios.post(
-        "/password/forgot-password",
+        "https://expense-g7cl.onrender.com/password/forgot-password",
         { email }
       );
       console.log(response.data);

@@ -15,7 +15,7 @@ export default function ReportCard() {
       try {
         setIsLoading(true)
         const response = await axios.get(
-          "/premium/report-card",
+          "https://expense-g7cl.onrender.com/premium/report-card",
           {
             headers: {
               Authorization: userToken,

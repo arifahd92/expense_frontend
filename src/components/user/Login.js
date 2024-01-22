@@ -33,7 +33,7 @@ function Login() {
     try {
       setIsLoading(true)
       const response = await axios.post(
-        "/login",
+        "https://expense-g7cl.onrender.com/login",
         formData
       );
 

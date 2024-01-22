@@ -33,7 +33,7 @@ function Signup() {
     try {
       setIsLoading(true)
       const response = await axios.post(
-        "/signup",
+        "https://expense-g7cl.onrender.com/signup",
         formData
       );
       // Assuming that you expect a status code in the response, check it like this:

@@ -14,7 +14,7 @@ export default function Leaderboard() {
       try {
         setIsLoading(true)
         const response = await axios.get(
-          "/premium/leader-board",
+          "https://expense-g7cl.onrender.com/premium/leader-board",
           {
             headers: {
               Authorization: userToken,

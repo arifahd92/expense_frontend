@@ -88,7 +88,7 @@ export default function Header() {
         };
         // this will be called on success payment
         const result = await axios.post(
-          "/payment-success",
+          "https://expense-g7cl.onrender.com/payment-success",
           data,
           {
             headers: {
