@@ -57,7 +57,7 @@ export default function Header() {
     }
     const userToken = localStorage.getItem("userToken");
     // creating a new order
-    const result = await axios.get("https://expense-g7cl.onrender.com/buy-premium", {
+    const result = await axios.get("/buy-premium", {
       headers: {
         "Content-Type": "application/json",
         Authorization: userToken,
@@ -88,7 +88,7 @@ export default function Header() {
         };
         // this will be called on success payment
         const result = await axios.post(
-          "https://expense-g7cl.onrender.com/payment-success",
+          "/payment-success",
           data,
           {
             headers: {

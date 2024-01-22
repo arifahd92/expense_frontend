@@ -18,7 +18,7 @@ export default function ResetPassword() {
         return;
       }
       const response = await axios.post(
-        "https://expense-g7cl.onrender.com/password/update-password",
+        "/password/update-password",
         { password, cnfPassword, reqId }
       );
       console.log(response.data);

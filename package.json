@@ -2,6 +2,7 @@
   "name": "et",
   "version": "0.1.0",
   "private": true,
+  "proxy":"https://expense-g7cl.onrender.com",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -17,6 +18,7 @@
     "axios": "^1.5.0",
     "bootstrap": "^5.3.2",
     "gh-pages": "^5.0.0",
+    "http-proxy-middleware": "^2.0.6",
     "razorpay": "^2.9.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.8.0",

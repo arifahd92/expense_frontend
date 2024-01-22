@@ -28,7 +28,7 @@ export default function Redirect({ Component }) {
       console.log("verify called");
       const token = userToken;
 
-      const apiUrl = "https://expense-g7cl.onrender.com/verify-user";
+      const apiUrl = "/verify-user";
       const requestData = {
         id,
         email,

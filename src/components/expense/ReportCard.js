@@ -15,7 +15,7 @@ export default function ReportCard() {
       try {
         setIsLoading(true)
         const response = await axios.get(
-          "https://expense-g7cl.onrender.com/premium/report-card",
+          "/premium/report-card",
           {
             headers: {
               Authorization: userToken,
@@ -77,7 +77,7 @@ export default function ReportCard() {
         zIndex: 5,
         backgroundColor: "GrayText",
       }}>
-      {report.length >= 4 && (
+      {report.length >=2 && (
         <div
           class="container bg-body-secondary table-responsive border border-danger  "
           style={{
@@ -92,7 +92,7 @@ export default function ReportCard() {
               <div className=" col m-4 d-flex justify-content-between  ">
                 <div className="text-primary">
                   {" "}
-                  Total Expense: {report[0]?.total}${" "}
+                  Total Expense: {report[0]?.totalExpenseAmount}${" "}
                 </div>
                 <div>
                   <button
@@ -123,41 +123,53 @@ export default function ReportCard() {
               </tr>
             </thead>
             <tbody>
-              {report.length >= 4 &&
+              {report.length >= 1 &&
                 report.map((item, ind) => {
                   console.log({item})
                   return (
-                    <tr key={item._id} className="text-center ">
-                      {ind != 0 && item._id  && (
-                        <>
-                          <td>#</td>
-                          <td>{item.category}</td>
-                          <td>{item.description}</td>
-                          <td>{item.amount}$</td>
-                        </>
+                    < >
+                      {ind !== 0   && (
+                              
+                          item.expenses.map((item,index)=>{
+                            
+                            return(
+                            <tr key={item._id} className="text-center ">
+                          
+                               <td>#</td>
+                               <td>{item.category}</td>
+                               <td>{item.description}</td>
+                               <td>{item.amount}$</td>
+                           
+                             </tr>
+                            )
+                          })
+                        
+                   
                       )}
-                      {ind != 0 && !item._id && (
-                        <>
-                          <td></td>
-                          <td className=" text-info">
-                            Total Expense Of {Object.keys(item)[0]}
-                          </td>
-                          <td></td>
-                          <td className=" text-info ">
-                            {Object.values(item)[0]}$
-                          </td>
-                        </>
-                      )}
-                    </tr>
+                      {
+                        ind !=0 &&
+                     
+                  <tr className="text-center ">
+               
+                  <td></td>
+                  <td className=" text-primary bg-light ">Total Expence of {item._id} </td>
+                  <td></td>
+                  <td className=" text-warning bg-primary  ">
+                    {item.total}$
+                  </td>
+              
+              </tr>
+                }
+                    </>
                   );
                 })}
               <tr className="text-center ">
                 <>
                   <td></td>
-                  <td className=" text-warning bg-light ">Total Expence</td>
+                  <td className=" text-warning bg-light ">Total Expence </td>
                   <td></td>
                   <td className=" text-warning bg-black  ">
-                    {report[0]?.total}$
+                    {report[0]?.totalExpenseAmount}$
                   </td>
                 </>
               </tr>
@@ -166,7 +178,7 @@ export default function ReportCard() {
         </div>
       )}
        {isLoading && <LoadingSpinner />}
-      {report.length < 4 && onceFetched && (
+      {report.length < 2 && onceFetched && (
         <div class="alert alert-warning text-bg-info text-center  ">
           Add atleast 2 expenses...
         </div>

@@ -42,7 +42,7 @@ export default function Expense() {
   useEffect(() => {
     console.log("expense got re mounted");
     userToken = localStorage.getItem("userToken");
-    console.log("useEffect of expense ");
+    console.log("useEffect of expense totalRecords "+totalRecords);
     const getExpense = () => {
       console.log(
         "get expense called*******************************************************"
